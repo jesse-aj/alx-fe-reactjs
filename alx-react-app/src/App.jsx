@@ -27,9 +27,9 @@ function App() {
       <Header />
       <MainContent />
       <UserProfile
-      name="Jesse Appiah"
-      age = {12}
-      bio = "I am a billionaire"
+      name="Alice"
+      age = {25}
+      bio = "Loves hiking and photography"
       />
       <Footer /> 
 

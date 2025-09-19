@@ -6,6 +6,7 @@ import WelcomeMessage from './components/WelcomeMessage';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
+import UserProfile from './components/UserProfile';
 
 
 function App() {
@@ -13,21 +14,26 @@ function App() {
 
   return (
     <>
-      <div>
+      {/* <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
-      </div> 
+      </div>  */}
 
       <WelcomeMessage /> 
       <Header />
       <MainContent />
+      <UserProfile
+      name="Jesse Appiah"
+      age = {12}
+      bio = "I am a billionaire"
+      />
       <Footer /> 
 
-    <h1>Vite + React</h1>
+    {/* <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -38,7 +44,7 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p> 
+      </p>  */}
     </>
   );
 }

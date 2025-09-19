@@ -2,7 +2,7 @@ function Header ()
 {
     return(
 <header>
-    <hi>My Favourite Cities</hi>
+    <h1>My Favourite Cities</h1>
 </header>
     );
 }

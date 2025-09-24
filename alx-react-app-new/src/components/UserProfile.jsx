@@ -3,9 +3,9 @@ function UserProfile  (props)
     return (
          <div className="user-profile" style= {{
            backgroundColor: "white",
-           padding: "20px",
+           padding: "10px",
            border: "3px solid aqua",
-           margin: "20px"
+           margin: "10px"
          }}>
             <h2 style = {{color:"blue"}}>{props.name}</h2>
             <p> <span style={{fontWeight: "bold", color:"blue" , fontSize:"20px"}}>Age : {props.age}</span></p>

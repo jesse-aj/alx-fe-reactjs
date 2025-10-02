@@ -27,7 +27,7 @@ function App() {
       <WelcomeMessage /> 
       <Header />
       <MainContent />
-      
+      <Counter />
       <UserProfile
       name="Alice"
       age= {25}
@@ -35,7 +35,7 @@ function App() {
       />
    
       <Footer /> 
-      <Counter />
+      
 
     {/* <h1>Vite + React</h1>
       <div className="card">

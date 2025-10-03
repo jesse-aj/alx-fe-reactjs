@@ -14,7 +14,7 @@ import { useState } from "react";
 
 
     const handleSubmit = (e) => {
-      e.preventDefault();
+      event.preventDefault();
       updateRecipe ({id : recipeId, title , description });
     };
 

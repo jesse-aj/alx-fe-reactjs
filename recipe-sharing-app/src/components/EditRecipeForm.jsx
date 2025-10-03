@@ -13,7 +13,7 @@ import { useState } from "react";
     const[description , setDescription] = useState(recipe?.description || "");
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (event) => {
       event.preventDefault();
       updateRecipe ({id : recipeId, title , description });
     };

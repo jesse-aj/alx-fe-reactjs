@@ -1,17 +1,20 @@
 import {create} from 'zustand';
 
 const useRecipeStore = create(set => ({
-  recipes: [],
+  recipes: [ ],
 
   searchTerm:  "",
   setSearchTerm: (term) => set ({searchTerm: term}),
 
 
   filteredRecipes: [],
-filteredRecipes : () => set ( state => ({
+filterRecipes : () => set ( state => ({
   filteredRecipes:state.recipes.filter(recipe => 
-    recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-  )
+    recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
+    recipe.ingredients.some(ing => 
+      ing.toLowerCase().includes(state.searchTerm.toLowerCase())) ||
+      recipe.time.toString().includes(state.searchTerm)
+    )
 })),
 
 
@@ -27,7 +30,7 @@ filteredRecipes : () => set ( state => ({
 
 updateRecipe : (updatedRecipe) => set((state) => ({
   recipes: state.recipes.map((recipe) => 
-    recipe.id === updatedRecipe.id ? updateRecipe: recipe),
+    recipe.id === updatedRecipe.id ? updatedRecipe: recipe),
 })),
 
 

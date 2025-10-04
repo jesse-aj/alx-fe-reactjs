@@ -16,9 +16,10 @@ const RecipeList = () => {
               <Link to={`/recipes/${recipe.id}`}>
                 {recipe.title}
               </Link>
+                <FavoriteButton recipeId={recipe.id} />
             </h3>
             <p>{recipe.description}</p>
-            <FavoriteButton recipeId={recipe.id} />
+          
           </div>
         ))
       )}

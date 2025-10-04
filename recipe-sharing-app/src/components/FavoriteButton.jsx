@@ -14,7 +14,7 @@ const FavoriteButton = ({recipeId}) => {
     const removeFavorite = useRecipeStore((state) => state.removeFavorite);
 
     //this checks if the specific recipe is already in Favorite List 
-    const isFavorite = favorites.include(recipeId)
+    const isFavorite = favorites.includes(recipeId)
 
    return (
     <button

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useRecipeStore from './recipeStore';
+import FavoriteButton from "./FavoriteButton";
 
 const RecipeList = () => {
   const filteredRecipes = useRecipeStore(state => state.filteredRecipes);
@@ -17,6 +18,7 @@ const RecipeList = () => {
               </Link>
             </h3>
             <p>{recipe.description}</p>
+            <FavoriteButton recipeId={recipe.id} />
           </div>
         ))
       )}

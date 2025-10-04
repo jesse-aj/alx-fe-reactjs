@@ -1,82 +1,83 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 
-const useRecipeStore = create(set => ({
-recipes: [ ], //all Recipes
-favorites: [ ], //array of favorite recipe ID
-recommendations: [ ], //personalizes Suggestions
-    //Function to search for recipes by typing either the first letter, a word or an ingredient in the Recipe list
-  searchTerm:  "",
-  setSearchTerm: (term) => set ({searchTerm: term}),
+const useRecipeStore = create((set, get) => ({
+  recipes: [], // All recipes
+  favorites: [], // Array of favorite recipe IDs
+  recommendations: [], // Personalized suggestions
+
+  // Search functionality
+  searchTerm: "",
+  setSearchTerm: (term) => set({ searchTerm: term }),
   filteredRecipes: [],
-filterRecipes: () =>
-  set((state) => ({
-    filteredRecipes: state.recipes.filter((recipe) =>
-      recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
-      (Array.isArray(recipe.ingredients) &&
-        recipe.ingredients.some((ing) =>
-          ing.toLowerCase().includes(state.searchTerm.toLowerCase())
-        )) ||
-      recipe.time?.toString().includes(state.searchTerm)
-    ),
-  })),
-
-// This adds a Recipe
-
-  addRecipe: (newRecipe) => set(state => ({ recipes: [...state.recipes, newRecipe] })),
-
-//This Deletes a Recipe
-
-  deleteRecipe: (id) => 
+  filterRecipes: () =>
     set((state) => ({
-    recipes: state.recipes.filter((recipe) => recipe.id !== id),
-  })),
-// This updates a recipe
-updateRecipe : (updatedRecipe) => set((state) => ({
-  recipes: state.recipes.map((recipe) => 
-    recipe.id === updatedRecipe.id ? updatedRecipe: recipe),
-})),
-
-  setRecipes: (recipes) => set({ recipes }),
-
-  //This adds Favorite
-  addFavorite : (recipeId) =>
-    set((state)=> ({
-      favorites:[...new Set ([...state.favorites, recipeId ])], // this avoids duplicate
+      filteredRecipes: state.recipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
+        (Array.isArray(recipe.ingredients) &&
+          recipe.ingredients.some((ing) =>
+            ing.toLowerCase().includes(state.searchTerm.toLowerCase())
+          )) ||
+        recipe.time?.toString().includes(state.searchTerm)
+      ),
     })),
 
+  // Add a new recipe
+  addRecipe: (newRecipe) =>
+    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
 
-    removeFavorite : (recipeId) => 
-      set((state)=> ({
-        favorites: state.favorites.filter((id) => id !== recipeId) ,
-      })),
+  // Delete a recipe by ID
+  deleteRecipe: (id) =>
+    set((state) => ({
+      recipes: state.recipes.filter((recipe) => recipe.id !== id),
+    })),
 
-         //To Generate Recommendations
-         generateRecommendations: () => {
-          const state =get();
+  // Update an existing recipe
+  updateRecipe: (updatedRecipe) =>
+    set((state) => ({
+      recipes: state.recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      ),
+    })),
 
-          // the logic that suggest recipes with at least 1 ingredients overlap with favorite
+  // Replace entire recipes list
+  setRecipes: (recipes) => set({ recipes }),
 
-          const favRecipes = state.recipes.filter((r) =>
-          state.favorite.includes(r.id)
-        );
+  // Add to favorites (avoids duplicates using Set)
+  addFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: [...new Set([...state.favorites, recipeId])],
+    })),
 
-        let recommend = state.recipes.filter((recipes) => 
-        favRecipes.some((fav) =>
-          fav.ingredients.some((ing) =>
-            recipe.ingredients.include(ing)
+  // Remove from favorites
+  removeFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: state.favorites.filter((id) => id !== recipeId),
+    })),
+
+  // Generate personalized recommendations
+  generateRecommendations: () => {
+    const { recipes, favorites } = get(); // 
+
+    // Get favorite recipe objects
+    const favRecipes = recipes.filter((r) => favorites.includes(r.id));
+
+    // Recommend recipes that share ingredients with favorite recipes
+    let recommended = recipes.filter((recipe) =>
+      favRecipes.some((fav) =>
+        fav.ingredients.some((ing) =>
+          recipe.ingredients.includes(ing) 
+        )
       )
-      ));
+    );
 
+    // Exclude already favorited ones
+    recommended = recommended.filter(
+      (recipe) => !favorites.includes(recipe.id)
+    );
 
-
-      //this excludes already Favorited ones
-      recommend = recommend.filter (
-        (recipe) => !state.favorites.includes (recipe.id)
-      );
-
-      set ({recommendations :recommend});
-         },
+    // Save to store
+    set({ recommendations: recommended });
+  },
 }));
-
 
 export default useRecipeStore;

@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { fetchUserData } from "./services/githubService";
+
+
 
 const Search = () => {
   const [formData, setFormData] = useState({
@@ -6,6 +9,12 @@ const Search = () => {
     email: "",
     Githubusername: ""
   });
+    
+  const [user,setUser] = useState(null); // this stores the git hub user data
+  const [loading,setloading] = useState(false);
+  const [error,setError] = useState("");
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,18 +24,33 @@ const Search = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted", formData);
-    alert(`Thanks ${formData.name}, your form has been submitted successfully!`);
+    setloading(true);
+    setError("");
+    setUser(null);
+
+     try {
+        // this calls the service function to fetch Github user
+        const data = await fetchUserData (formData.Githubusername);
+        setUser(data);
+     } catch (error) {
+        setError("Looks like i cant find the user sikeeeeee 😢");
+     }  finally {
+        setLoading(false);
+     }
   };
 
+
+
   return (
+   <div className ="max-w-md mx-auto mt-10 p-4 bg-gray-100 rounded-lg shadow">
+
     <form
       onSubmit={handleSubmit}
       className="p-4 bg-gray-100 rounded-lg shadow"
     >
-      <h2 className="text-xl font-semibold mb-3">Contact Us</h2>
+      <h2 className="text-xl font-semibold mb-3"> Search for GitHub Usernames </h2>
 
       <label className="block mb-2">
         Name:
@@ -70,7 +94,35 @@ const Search = () => {
         Submit
       </button>
     </form>
+
+    <div> 
+        
+        {loading && <p>loading...</p>}
+
+        {error && <p>{error} </p>}
+        {user && (
+        <div  className="mt-4 p-4 bg-white rounded-lg shadow text-center">
+            <img 
+            src = {user.avatar_url}
+            alt = {user.login}
+            classname = "w-24 h-24 mx-auto rounded-full mb-3 border-2 border-blue-500" 
+            />
+
+            <h3 className = "text-lg font-semibold"> {user.name || user.login } </h3>
+
+           <a
+           href = {user.html_url}
+            target = "_blank"
+            rel = "nonreferrer"
+            className = "text-blue-600 underline"
+            >  View the Gitub Profile
+            </a>
+          </div>
+        )}
+    </div>
+    </div>
   );
 };
+
 
 export default Search;

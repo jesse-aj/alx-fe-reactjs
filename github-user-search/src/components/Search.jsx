@@ -17,7 +17,8 @@ const Search = () => {
 
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const name = e.target.name;
+    const value = e.target.value;
     setFormData({
       ...formData,
       [name]: value,
@@ -105,7 +106,7 @@ const Search = () => {
             <img 
             src = {user.avatar_url}
             alt = {user.login}
-            classname = "w-24 h-24 mx-auto rounded-full mb-3 border-2 border-blue-500" 
+            className = "w-24 h-24 mx-auto rounded-full mb-3 border-2 border-blue-500" 
             />
 
             <h3 className = "text-lg font-semibold"> {user.name || user.login } </h3>

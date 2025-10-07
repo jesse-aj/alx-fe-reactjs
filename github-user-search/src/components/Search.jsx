@@ -36,7 +36,7 @@ const Search = () => {
         const data = await fetchUserData (formData.Githubusername);
         setUser(data);
      } catch (error) {
-        setError("Looks like i cant find the user sikeeeeee 😢");
+        setError("Looks like we cant find the user");
      }  finally {
         setLoading(false);
      }

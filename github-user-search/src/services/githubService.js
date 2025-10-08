@@ -11,6 +11,7 @@ export async function fetchUserData  (username) {
     try {
         // make a grt request to the Gitub api
 
+
         const response = await axios.get(` https://api.github.com/users/${username}`) ;
 
         //Return the data part of the response
@@ -27,15 +28,16 @@ export async function fetchUserData  (username) {
 export async function searchUsers ({Githubusername, location, minRepos}) {
     try {
         // this is where we build the query
-        let query =  Githubusername || "";
+         let query = Githubusername || "";
 
         if (location) query +=`+location:${location}`; // this gives a condition if the location is filled (add location filter)
-        if (minRepos) query +=`+repos:>${minRepos}`; // this gives a condition to check if this feild is filled am meets the minimum requirements ( add repo filter)
+      
           // this the api endpoint that takes the correct endpoint for the query (makes the query safe)
         const url = `https://api.github.com/search/users?q=${encodeURIComponent(query)}`;
     // Normal fetching code and returning a list of users
         const response= await axios.get(url);
         return response.data.items ;
+
 
     } // normal catching errors
     catch (error) {
@@ -44,3 +46,6 @@ export async function searchUsers ({Githubusername, location, minRepos}) {
     }
 
 }
+
+
+

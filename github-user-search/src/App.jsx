@@ -7,10 +7,10 @@ import "./index.css"
 function App() {
 
  return ( 
-      <div>
-      
+
+ <div>
         <nav>
-          <Link to="/">Search</Link>
+          <Link to="/" className="text-blue-500 ">Search</Link>
         </nav>
 
         

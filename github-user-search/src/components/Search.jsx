@@ -10,7 +10,7 @@ const Search = () => {
     email: "",
     Githubusername: "",
     location: "",
-    minimumRepositories: "",
+   minRepos: "",
   });
     
   const [users,setUsers] = useState([]); // this stores the git hub users data in an array
@@ -42,7 +42,7 @@ const Search = () => {
          ({
           Githubusername: formData.Githubusername,
           location: formData.location,
-          minimumRepositories: formData.minimumRepositories,
+         minRepos: formData.minRepos,
          });
 
  
@@ -116,8 +116,8 @@ const Search = () => {
           Minimum Repositories:
           <input
             type="number"
-            name="minimumRepositories"
-            value={formData.minimumRepositories}
+            name= "minRepos"
+            value={formData.minRepos}
             onChange={handleChange}
             className="block w-full p-2 border rounded mt-1"
             placeholder="e.g 10"

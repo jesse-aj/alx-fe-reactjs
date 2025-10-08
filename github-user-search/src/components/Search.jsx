@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { fetchUserData } from "../services/githubService";
+import { fetchUserData, searchUsers } from "../services/githubService";
+
 
 
 
@@ -7,15 +8,17 @@ const Search = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    Githubusername: ""
+    Githubusername: "",
+    location: "",
+    minimumRepositories: "",
   });
     
-  const [user,setUser] = useState(null); // this stores the git hub user data
-  const [loading,setloading] = useState(false);
+  const [users,setUsers] = useState([]); // this stores the git hub users data in an array
+  const [loading,setLoading] = useState(false);
   const [error,setError] = useState("");
 
 
-
+ // this handles change 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -25,16 +28,25 @@ const Search = () => {
     });
   };
 
+
+ // this handles submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setloading(true);
+    setLoading(true);
     setError("");
-    setUser(null);
+    setUsers([]);
 
      try {
         // this calls the service function to fetch Github user
-        const data = await fetchUserData (formData.Githubusername);
-        setUser(data);
+        const results = await searchUsers
+         ({
+          Githubusername: formData.Githubusername,
+          location: formData.location,
+          minimumRepositories: formData.minimumRepositories,
+         });
+
+ 
+        setUsers(results);
      } catch (error) {
         setError("Looks like we cant find the user");
      }  finally {
@@ -45,11 +57,11 @@ const Search = () => {
 
 
   return (
-   <div className ="max-w-md mx-auto mt-10 p-4 bg-gray-100 rounded-lg shadow">
+   <div className ="max-w-md mx-auto mt-10 p-4 bg-blue-200 rounded-lg shadow">
 
     <form
       onSubmit={handleSubmit}
-      className="p-4 bg-gray-100 rounded-lg shadow"
+      className="p-4 bg-white rounded-lg shadow"
     >
       <h2 className="text-xl font-semibold mb-3"> Search for GitHub Usernames </h2>
 
@@ -88,6 +100,32 @@ const Search = () => {
         />
       </label>
 
+       <label className="block">
+          Location:
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            className="block w-full p-2 border rounded mt-1"
+            placeholder="e.g. Ghana"
+          />
+        </label>
+
+        <label className="block">
+          Minimum Repositories:
+          <input
+            type="number"
+            name="minimumRepositories"
+            value={formData.minimumRepositories}
+            onChange={handleChange}
+            className="block w-full p-2 border rounded mt-1"
+            placeholder="e.g 10"
+            min="5"
+          />
+        </label>
+
+
       <button
         type="submit"
         className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
@@ -95,35 +133,47 @@ const Search = () => {
         Submit
       </button>
     </form>
+   
 
-    <div> 
-        
-        {loading && <p>loading...</p>}
 
-        {error && <p>{error} </p>}
-        {user && (
-        <div  className="mt-4 p-4 bg-white rounded-lg shadow text-center">
-            <img 
-            src = {user.avatar_url}
-            alt = {user.login}
-            className = "w-24 h-24 mx-auto rounded-full mb-3 border-2 border-blue-500" 
-            />
+    <div className = "mt-6"> 
+        {/* Checks if loading is true  and diplay the loading... text, after it checks for errors , if there are no errors it 
+        checks if the data or github name is true and dispalty it */}
+        {loading && <p className="text-green-600">loading...</p>}
 
-            <h3 className = "text-lg font-semibold"> {user.name || user.login } </h3>
+        {error && <p className="text-red-500"> {error} </p>}
+         {/* this displays the list of github profiles in a style */}
 
-           <a
-           href = {user.html_url}
-            target = "_blank"
-            rel = "nonreferrer"
-            className = "text-blue-600 underline"
-            >  View the Gitub Profile
+         { users.length > 0 && (
+          <div className="grid gap-4">
+            {users.map ((user) => (
+             <div
+             key= {user.id}
+             className="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+               
+             <img
+            src={user.avatar_url}
+            alt={user.login}
+            className="w-16 h-16 rounded-full border-2 border-blue-500"
+          />
+          <div>
+            <h3 className="font-semibold text-lg">{user.login}</h3>
+            <a
+              href={user.html_url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-blue-600 underline text-sm"
+            >
+              View Profile
             </a>
           </div>
-        )}
+        </div>
+      ))}
     </div>
-    </div>
-  );
-};
+  )}
+</div>
+</div>
 
 
+  )};
 export default Search;

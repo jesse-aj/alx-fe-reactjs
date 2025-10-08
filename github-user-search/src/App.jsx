@@ -1,6 +1,7 @@
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Search from "./components/Search" ;
+import "./index.css"
   
 
 function App() {

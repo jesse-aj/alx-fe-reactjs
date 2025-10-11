@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import UserProfie from "./UserProfile"
+import UserProfie from "./components/UserProfile"
 
 
 function App() {

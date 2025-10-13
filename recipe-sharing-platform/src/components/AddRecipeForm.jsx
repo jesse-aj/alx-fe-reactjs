@@ -41,7 +41,7 @@ function AddRecipeForm() {
     <div className="flex justify-center items-center min-h-screen bg-gray-50 p-6">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg"
+        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg md:5"
       >
 
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">

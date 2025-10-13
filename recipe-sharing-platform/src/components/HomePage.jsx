@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import  { Link } from "react-router-dom";
+import recipeData from "../data.json";
 
 function HomePage () {
     const [recipes, setRecipes] = useState([]);
@@ -6,10 +8,7 @@ function HomePage () {
    useEffect(() => {
 // this will load the data when the components mounts
    
-   fetch ("/data.json")
-   .then((response) => response.json())
-   .then((data) => setRecipes(data))
-   .catch((error) => console.error("Error loading recipes:", error));
+   setRecipes(recipeData)
 }, 
 []); // this is just an empty dependency array that runs once on mount 
 
@@ -19,7 +18,7 @@ return (
         🍽️ Our Delicious Recipes
       </h1>
 
-      {recipes.length > 0 ? (
+      
         <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-2">
           {recipes.map((recipe) => (
             <div
@@ -38,19 +37,19 @@ return (
                 {recipe.title}
               </h2>
 
-              
-
+          
               <p className="text-gray-600 text-s mb-3">{recipe.summary}</p>
+
+
               {/* Action button */}
+              <Link to = {`recipe/${recipe.id}`}>
               <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                 View Recipe
               </button>
+              </Link>
             </div>
           ))}
         </div>
-      ) : (
-        <p className="text-center text-gray-500">Loading recipes...</p>
-      )}
     </div>
   );
 }

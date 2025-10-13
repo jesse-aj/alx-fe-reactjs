@@ -1,19 +1,23 @@
-import "./App.css"
-import HomePage from './components/HomePage'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import RecipeDetail from "./components/RecipeDetail" ;
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import HomePage from "./components/HomePage";
+import RecipeDetail from "./components/RecipeDetail";
+import AddRecipeForm from "./components/AddRecipeForm";
 
 function App() {
-
-
   return (
- <Router>
-  <Routes>
-    <Route path = "/" element ={<HomePage />} />
-     <Route path = "/recipe/:id" element ={<RecipeDetail />} />
-  </Routes>
+    <Router>
+      <nav className="bg-green-600 text-white p-4 flex justify-between">
+        <Link to="/" className="font-semibold hover:underline">Home</Link>
+        <Link to="/add" className="font-semibold hover:underline">Add Recipe</Link>
+      </nav>
 
- </Router>
-);
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
+        <Route path="/add" element={<AddRecipeForm />} />
+      </Routes>
+    </Router>
+  );
 }
-export default App
+
+export default App;

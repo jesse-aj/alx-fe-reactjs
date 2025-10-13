@@ -3,12 +3,76 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "200g spaghetti",
+      "100g pancetta or bacon",
+      "2 large eggs",
+      "50g grated parmesan cheese",
+      "Salt and pepper to taste"
+    ],
+    "instructions": [
+      "Boil the spaghetti until al dente.",
+      "Fry the pancetta until crispy.",
+      "Whisk eggs and cheese together in a bowl.",
+      "Combine everything and season with pepper."
+    ]
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
     "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g boneless chicken",
+      "1 cup yogurt",
+      "2 tbsp tikka masala spice",
+      "1 cup tomato puree",
+      "1/2 cup cream"
+    ],
+    "instructions": [
+      "Marinate the chicken in yogurt and spices.",
+      "Grill the chicken until cooked through.",
+      "Simmer tomato puree with cream.",
+      "Add chicken and cook for 10 minutes."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g boneless chicken",
+      "1 cup yogurt",
+      "2 tbsp tikka masala spice",
+      "1 cup tomato puree",
+      "1/2 cup cream"
+    ],
+    "instructions": [
+      "Marinate the chicken in yogurt and spices.",
+      "Grill the chicken until cooked through.",
+      "Simmer tomato puree with cream.",
+      "Add chicken and cook for 10 minutes."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g boneless chicken",
+      "1 cup yogurt",
+      "2 tbsp tikka masala spice",
+      "1 cup tomato puree",
+      "1/2 cup cream"
+    ],
+    "instructions": [
+      "Marinate the chicken in yogurt and spices.",
+      "Grill the chicken until cooked through.",
+      "Simmer tomato puree with cream.",
+      "Add chicken and cook for 10 minutes."
+    ]
   }
 ]

@@ -10,7 +10,7 @@ const FormikForm = () => {
         password:""
      };
    
-     //Define validation Schema using Yup
+     //Define validation Schema using Yup  rte
 
 
 const validationSchema = Yup.object ({
